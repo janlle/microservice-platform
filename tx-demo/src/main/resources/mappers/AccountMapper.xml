@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.leone.tx.demo.mapper.AccountMapper">
+    <resultMap id="BaseResultMap" type="com.leone.tx.demo.entity.Account">
+        <id column="account_id" jdbcType="INTEGER" property="accountId"/>
+        <result column="account" jdbcType="VARCHAR" property="account"/>
+        <result column="user_id" jdbcType="INTEGER" property="userId"/>
+        <result column="pre_money" jdbcType="INTEGER" property="preMoney"/>
+        <result column="money" jdbcType="INTEGER" property="money"/>
+        <result column="version" jdbcType="INTEGER" property="version"/>
+        <result column="deleted" jdbcType="BIT" property="deleted"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        account_id, account, user_id, pre_money, money, version, deleted, create_time
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_account
+        where account_id = #{accountId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete
+        from t_account
+        where account_id = #{accountId,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.leone.tx.demo.entity.Account">
+        insert into t_account (account_id, account, user_id,
+                               pre_money, money, version,
+                               deleted, create_time)
+        values (#{accountId,jdbcType=INTEGER}, #{account,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER},
+                #{preMoney,jdbcType=INTEGER}, #{money,jdbcType=INTEGER}, #{version,jdbcType=INTEGER},
+                #{deleted,jdbcType=BIT}, #{createTime,jdbcType=TIMESTAMP})
+    </insert>
+    <insert id="insertSelective" parameterType="com.leone.tx.demo.entity.Account">
+        insert into t_account
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="accountId != null">
+                account_id,
+            </if>
+            <if test="account != null">
+                account,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="preMoney != null">
+                pre_money,
+            </if>
+            <if test="money != null">
+                money,
+            </if>
+            <if test="version != null">
+                version,
+            </if>
+            <if test="deleted != null">
+                deleted,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="accountId != null">
+                #{accountId,jdbcType=INTEGER},
+            </if>
+            <if test="account != null">
+                #{account,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="preMoney != null">
+                #{preMoney,jdbcType=INTEGER},
+            </if>
+            <if test="money != null">
+                #{money,jdbcType=INTEGER},
+            </if>
+            <if test="version != null">
+                #{version,jdbcType=INTEGER},
+            </if>
+            <if test="deleted != null">
+                #{deleted,jdbcType=BIT},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.leone.tx.demo.entity.Account">
+        update t_account
+        <set>
+            <if test="account != null">
+                account = #{account,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="preMoney != null">
+                pre_money = #{preMoney,jdbcType=INTEGER},
+            </if>
+            <if test="money != null">
+                money = #{money,jdbcType=INTEGER},
+            </if>
+            <if test="version != null">
+                version = #{version,jdbcType=INTEGER},
+            </if>
+            <if test="deleted != null">
+                deleted = #{deleted,jdbcType=BIT},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where account_id = #{accountId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.leone.tx.demo.entity.Account">
+        update t_account
+        set account     = #{account,jdbcType=VARCHAR},
+            user_id     = #{userId,jdbcType=INTEGER},
+            pre_money   = #{preMoney,jdbcType=INTEGER},
+            money       = #{money,jdbcType=INTEGER},
+            version     = #{version,jdbcType=INTEGER},
+            deleted     = #{deleted,jdbcType=BIT},
+            create_time = #{createTime,jdbcType=TIMESTAMP}
+        where account_id = #{accountId,jdbcType=INTEGER}
+    </update>
+</mapper>
