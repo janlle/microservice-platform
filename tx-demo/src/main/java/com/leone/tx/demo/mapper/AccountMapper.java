@@ -26,7 +26,8 @@ public interface AccountMapper {
 
     int updateByPrimaryKey(Account record);
 
-    @Update("update t_account set money = money + #{total} where account = #{account} and money > #{total}")
+//    @Update("update t_account set money = money + #{total} where account = #{account} and money > #{total}")
+    @Update("update t_account set money = money + #{total} where account = #{account}")
     int updateMoney(@Param("total") Integer total, @Param("account") String account);
 
     @Update("update t_account set money = money + #{money}, version = version + 1 where account_id = #{accountId} and version = #{version}")

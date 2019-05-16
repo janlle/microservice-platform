@@ -28,7 +28,7 @@ public class TxZkLock implements Lock {
     @Autowired
     private CuratorFramework zkClient;
 
-    @Value("${zk.localPath}")
+    @Value("${zk.lockPath}")
     private String lockPath;
 
     private String currentPath;
@@ -37,7 +37,7 @@ public class TxZkLock implements Lock {
 
     public boolean tryLock() {
         try {
-            //根节点的初始化放在构造函数里面不生效
+            // 根节点的初始化放在构造函数里面不生效
             if (zkClient.checkExists().forPath(lockPath) == null) {
                 System.out.println("初始化根节点==========>" + lockPath);
                 zkClient.create().creatingParentsIfNeeded().forPath(lockPath);
@@ -48,14 +48,13 @@ public class TxZkLock implements Lock {
 
         if (currentPath == null) {
             try {
-                currentPath = this.zkClient.create().withMode(CreateMode.EPHEMERAL_SEQUENTIAL)
-                        .forPath(lockPath + "/");
+                currentPath = this.zkClient.create().withMode(CreateMode.EPHEMERAL_SEQUENTIAL).forPath(lockPath + "/");
             } catch (Exception e) {
                 return false;
             }
         }
         try {
-            //此处该如何获取所有的临时节点呢？如locks00004.而不是获取/locks/order中的order作为子节点？？
+            // 此处该如何获取所有的临时节点呢？如locks00004.而不是获取/locks/order中的order作为子节点？？
             List<String> childrens = this.zkClient.getChildren().forPath(lockPath);
             Collections.sort(childrens);
             if (currentPath.equals(lockPath + "/" + childrens.get(0))) {

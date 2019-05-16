@@ -2,9 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.leone.tx.demo.mapper.AccountMapper">
     <resultMap id="BaseResultMap" type="com.leone.tx.demo.entity.Account">
-        <id column="account_id" jdbcType="INTEGER" property="accountId"/>
+        <id column="account_id" jdbcType="BIGINT" property="accountId"/>
         <result column="account" jdbcType="VARCHAR" property="account"/>
-        <result column="user_id" jdbcType="INTEGER" property="userId"/>
+        <result column="user_id" jdbcType="BIGINT" property="userId"/>
         <result column="pre_money" jdbcType="INTEGER" property="preMoney"/>
         <result column="money" jdbcType="INTEGER" property="money"/>
         <result column="version" jdbcType="INTEGER" property="version"/>
@@ -14,13 +14,13 @@
     <sql id="Base_Column_List">
         account_id, account, user_id, pre_money, money, version, deleted, create_time
     </sql>
-    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from t_account
         where account_id = #{accountId,jdbcType=INTEGER}
     </select>
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
         delete
         from t_account
         where account_id = #{accountId,jdbcType=INTEGER}
@@ -29,7 +29,7 @@
         insert into t_account (account_id, account, user_id,
                                pre_money, money, version,
                                deleted, create_time)
-        values (#{accountId,jdbcType=INTEGER}, #{account,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER},
+        values (#{accountId,jdbcType=BIGINT}, #{account,jdbcType=VARCHAR}, #{userId,jdbcType=BIGINT},
                 #{preMoney,jdbcType=INTEGER}, #{money,jdbcType=INTEGER}, #{version,jdbcType=INTEGER},
                 #{deleted,jdbcType=BIT}, #{createTime,jdbcType=TIMESTAMP})
     </insert>
@@ -63,13 +63,13 @@
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="accountId != null">
-                #{accountId,jdbcType=INTEGER},
+                #{accountId,jdbcType=BIGINT},
             </if>
             <if test="account != null">
                 #{account,jdbcType=VARCHAR},
             </if>
             <if test="userId != null">
-                #{userId,jdbcType=INTEGER},
+                #{userId,jdbcType=BIGINT},
             </if>
             <if test="preMoney != null">
                 #{preMoney,jdbcType=INTEGER},
@@ -95,7 +95,7 @@
                 account = #{account,jdbcType=VARCHAR},
             </if>
             <if test="userId != null">
-                user_id = #{userId,jdbcType=INTEGER},
+                user_id = #{userId,jdbcType=BIGINT},
             </if>
             <if test="preMoney != null">
                 pre_money = #{preMoney,jdbcType=INTEGER},
@@ -113,17 +113,17 @@
                 create_time = #{createTime,jdbcType=TIMESTAMP},
             </if>
         </set>
-        where account_id = #{accountId,jdbcType=INTEGER}
+        where account_id = #{accountId,jdbcType=BIGINT}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.leone.tx.demo.entity.Account">
         update t_account
         set account     = #{account,jdbcType=VARCHAR},
-            user_id     = #{userId,jdbcType=INTEGER},
+            user_id     = #{userId,jdbcType=BIGINT},
             pre_money   = #{preMoney,jdbcType=INTEGER},
             money       = #{money,jdbcType=INTEGER},
             version     = #{version,jdbcType=INTEGER},
             deleted     = #{deleted,jdbcType=BIT},
             create_time = #{createTime,jdbcType=TIMESTAMP}
-        where account_id = #{accountId,jdbcType=INTEGER}
+        where account_id = #{accountId,jdbcType=BIGINT}
     </update>
 </mapper>

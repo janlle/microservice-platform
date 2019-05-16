@@ -16,43 +16,37 @@ import java.util.concurrent.TimeUnit;
  * @author leone
  * @since 2019-05-14
  **/
-public class TxRedisson {
+public class RedissonLockTest {
 
     public static void main(String[] args) {
-        // Redisson连接配置文件
+        // redis 连接配置
         Config config = new Config();
-        config.useSingleServer().setAddress("redis://127.0.0.1:6379");
+        config.useSingleServer().setAddress("redis://ip:6379");
         RedissonClient redisson = Redisson.create(config);
 
-        // 1.获得锁对象实例
+        // 获得锁对象实例
         RLock testLock = redisson.getLock("testLock");
 
-        new TxRedisson().testM(testLock);
-    }
-
-    public void testM(RLock rLock) {
         ExecutorService fixedThreadPool = Executors.newFixedThreadPool(5);
-        for (int i = 0; i < 5; i++) {
-            fixedThreadPool.execute(new Task("worker_" + i, rLock));
+        for (int i = 0; i < 10; i++) {
+            fixedThreadPool.execute(new Task("worker_" + i, testLock));
         }
+        fixedThreadPool.shutdown();
     }
 
-    class Task implements Runnable {
-
+    static class Task implements Runnable {
         private String name;
-
         private RLock rLock;
 
         public Task(String name, RLock rLock) {
             this.name = name;
             this.rLock = rLock;
-            System.out.println(name + " : " + rLock);
         }
 
         public void run() {
             boolean res = false;
             try {
-                System.out.println(name + "开始夺锁大战");
+                System.out.println(name + "尝试获取锁...");
                 // 1.不支持过期自动解锁，不会超时
                 // rLock.lock();
 
@@ -61,23 +55,23 @@ public class TxRedisson {
 
                 // 3. 尝试加锁，最多等待20秒，上锁以后10秒自动解锁（实际项目中推荐这种，以防出现死锁）
                 res = rLock.tryLock(20, 10, TimeUnit.SECONDS);
+
+                System.err.println(name + " 获取锁...");
                 if (res) {
-                    System.out.println(this.name + "开始工作了" + new Date());
-                    int time = 5000;
-                    Thread.sleep(time);
-                    System.out.println(this.name + "结束工作了;" + new Date());
+                    System.err.println(name + " exec success...");
+                    Thread.sleep(2000);
                 } else {
-                    System.out.println(name + "等待超时");
+                    System.err.println(name + " 等待超时...");
                 }
             } catch (InterruptedException e) {
                 e.printStackTrace();
             } finally {
                 if (res) {
+                    System.err.println(name + " 释放锁...");
                     rLock.unlock();
                 }
             }
         }
-
     }
 
 

@@ -4,6 +4,7 @@ import com.leone.tx.demo.entity.Account;
 import com.leone.tx.demo.mapper.AccountMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * <p>
@@ -12,7 +13,6 @@ import org.springframework.stereotype.Service;
  * @since 2019-05-15
  **/
 @Service
-// @Transactional
 public class AccountService {
 
     @Autowired
@@ -26,11 +26,11 @@ public class AccountService {
      * @param total
      * @return
      */
-    // @Transactional
+    @Transactional
     public String transfer(String from, String to, Integer total) {
         int i1 = accountMapper.updateMoney(-total, from);
 
-        int i = 1 / 0;
+        // int i = 1 / 0;
 
         int i2 = accountMapper.updateMoney(total, to);
         return i1 == i2 ? "success" : "error";

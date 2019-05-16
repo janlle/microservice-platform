@@ -2,6 +2,8 @@ package com.leone.tx.demo.controller;
 
 import com.leone.tx.demo.entity.Account;
 import com.leone.tx.demo.service.AccountService;
+import com.leone.tx.demo.service.RedisLockService;
+import com.leone.tx.demo.service.ZkLockService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,9 +20,15 @@ public class AccountController {
     @Autowired
     private AccountService accountService;
 
+    @Autowired
+    private ZkLockService zkLockService;
+
+    @Autowired
+    private RedisLockService redisLockService;
+
     @GetMapping("{from}/{to}")
     public String transfer(@PathVariable("from") String from, @PathVariable("to") String to, @RequestParam Integer total) {
-        return accountService.transfer(from, to, total);
+        return redisLockService.transfer(from, to, total);
     }
 
     @GetMapping("{accountId}")

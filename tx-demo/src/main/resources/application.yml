@@ -4,9 +4,32 @@ spring:
 
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://39.108.125.41:3306/boot?useUnicode=true&characterEncoding=utf-8&useSSL=false
-    username: root
-    password: cloud
+    url: jdbc:mysql://xxx:3306/boot?useUnicode=true&characterEncoding=utf-8&useSSL=false
+    username: xxx
+    password: xxx
+
+# redis 配置
+  redis:
+    # 数据库索引
+    database: 0
+    # 连接超时时间
+    timeout: 10000ms
+    # ip地址
+    host: 127.0.0.1
+    # 端口
+    port: 6379
+    # 密码
+    # password:
+    jedis:
+      pool:
+        # 最大连接数
+        max-active: 8
+        # 最大阻塞等待时间(负数表示没限制)
+        max-wait: -1ms
+        # 最大空闲
+        max-idle: 8
+        # 最小空闲
+        min-idle: 0
 
 # mybatis-springBoot 配置
 mybatis:
@@ -42,6 +65,9 @@ mybatis:
   executor-type: reuse
 
 
+
 zk:
-  url: localhost
-  localPath: /
+  url: ip:2181
+  lockPath: /zoo-lock
+
+lockName: redis-lock
