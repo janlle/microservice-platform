@@ -14,13 +14,13 @@ import org.apache.ibatis.annotations.Update;
 @Mapper
 public interface AccountMapper {
 
-    int deleteByPrimaryKey(Integer accountId);
+    int deleteByPrimaryKey(Long accountId);
 
     int insert(Account record);
 
     int insertSelective(Account record);
 
-    Account selectByPrimaryKey(Integer accountId);
+    Account selectByPrimaryKey(Long accountId);
 
     int updateByPrimaryKeySelective(Account record);
 
@@ -29,5 +29,6 @@ public interface AccountMapper {
     @Update("update t_account set money = money + #{total} where account = #{account} and money > #{total}")
     int updateMoney(@Param("total") Integer total, @Param("account") String account);
 
-
+    @Update("update t_account set money = money + #{money}, version = version + 1 where account_id = #{accountId} and version = #{version}")
+    int updateMoneyVersion(Account account);
 }

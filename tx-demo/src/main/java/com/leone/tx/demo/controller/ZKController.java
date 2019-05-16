@@ -28,12 +28,10 @@ public class ZKController {
     @GetMapping("/lock")
     public Boolean getLock() throws Exception {
         for (int i = 0; i < 10; i++) {
-            new Thread(new Runnable() {
-                public void run() {
-                    txZkLock.lock();
+            new Thread(() -> {
+                txZkLock.lock();
 
-                    txZkLock.unlock();
-                }
+                txZkLock.unlock();
             }).start();
         }
         return true;

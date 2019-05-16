@@ -4,7 +4,6 @@ import com.leone.tx.demo.entity.Account;
 import com.leone.tx.demo.mapper.AccountMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  * <p>
@@ -37,13 +36,11 @@ public class AccountService {
         return i1 == i2 ? "success" : "error";
     }
 
-
     /**
-     *
      * @param accountId
      * @return
      */
-    public Account findOne(Integer accountId) {
+    public Account findOne(Long accountId) {
         return accountMapper.selectByPrimaryKey(accountId);
     }
 

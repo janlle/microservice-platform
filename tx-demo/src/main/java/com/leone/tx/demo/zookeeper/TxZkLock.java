@@ -30,7 +30,9 @@ public class TxZkLock implements Lock {
 
     @Value("${zk.localPath}")
     private String lockPath;
+
     private String currentPath;
+
     private String beforePath;
 
     public boolean tryLock() {

@@ -24,7 +24,7 @@ public class AccountController {
     }
 
     @GetMapping("{accountId}")
-    public Account transfer(@PathVariable("accountId") Integer accountId) {
+    public Account transfer(@PathVariable("accountId") Long accountId) {
         return accountService.findOne(accountId);
     }
 

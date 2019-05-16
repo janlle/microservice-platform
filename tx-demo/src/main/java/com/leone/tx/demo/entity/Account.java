@@ -4,11 +4,11 @@ import java.util.Date;
 
 public class Account {
 
-    private Integer accountId;
+    private Long accountId;
+
+    private Long userId;
 
     private String account;
-
-    private Integer userId;
 
     private Integer preMoney;
 
@@ -20,11 +20,11 @@ public class Account {
 
     private Date createTime;
 
-    public Integer getAccountId() {
+    public Long getAccountId() {
         return accountId;
     }
 
-    public void setAccountId(Integer accountId) {
+    public void setAccountId(Long accountId) {
         this.accountId = accountId;
     }
 
@@ -36,11 +36,11 @@ public class Account {
         this.account = account == null ? null : account.trim();
     }
 
-    public Integer getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 
@@ -82,5 +82,19 @@ public class Account {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    @Override
+    public String toString() {
+        return "Account{" +
+                "accountId=" + accountId +
+                ", account='" + account + '\'' +
+                ", userId=" + userId +
+                ", preMoney=" + preMoney +
+                ", money=" + money +
+                ", version=" + version +
+                ", deleted=" + deleted +
+                ", createTime=" + createTime +
+                '}';
     }
 }
