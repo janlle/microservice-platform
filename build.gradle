@@ -7,9 +7,12 @@ allprojects {
     version = '1.0.0.RELEASE'
 }
 
+
+
 subprojects {
     apply plugin: 'java'
     apply plugin: 'maven-publish'
+    apply plugin: 'idea'
 
     repositories {
         mavenLocal()
@@ -19,15 +22,26 @@ subprojects {
         maven {
             url = 'http://maven.aliyun.com/nexus/content/groups/public/'
         }
+        maven {
+            url = 'http://maven.springframework.org/release'
+        }
     }
 
     sourceCompatibility = '1.8'
+    targetCompatibility = '1.8'
+
 
     publishing {
         publications {
             maven(MavenPublication) {
                 from(components.java)
             }
+        }
+    }
+
+    jar {
+        manifest {
+            attributes('Implementation-Title': 'Gradle')
         }
     }
 
