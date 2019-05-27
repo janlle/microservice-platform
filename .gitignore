@@ -6,6 +6,11 @@ target/
 *.tar
 *.tar.gz
 
+# gradle ignore
+gradle/
+.gradle
+
+
 # eclipse ignore
 .settings/
 .project

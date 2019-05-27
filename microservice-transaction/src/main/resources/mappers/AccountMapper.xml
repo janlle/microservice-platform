@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.leone.tx.demo.mapper.AccountMapper">
-    <resultMap id="BaseResultMap" type="com.leone.tx.demo.entity.Account">
+<mapper namespace="com.leone.microservice.transaction.mapper.AccountMapper">
+    <resultMap id="BaseResultMap" type="com.leone.microservice.transaction.entity.Account">
         <id column="account_id" jdbcType="BIGINT" property="accountId"/>
         <result column="account" jdbcType="VARCHAR" property="account"/>
         <result column="user_id" jdbcType="BIGINT" property="userId"/>
@@ -25,7 +25,7 @@
         from t_account
         where account_id = #{accountId,jdbcType=INTEGER}
     </delete>
-    <insert id="insert" parameterType="com.leone.tx.demo.entity.Account">
+    <insert id="insert" parameterType="com.leone.microservice.transaction.entity.Account">
         insert into t_account (account_id, account, user_id,
                                pre_money, money, version,
                                deleted, create_time)
@@ -33,7 +33,7 @@
                 #{preMoney,jdbcType=INTEGER}, #{money,jdbcType=INTEGER}, #{version,jdbcType=INTEGER},
                 #{deleted,jdbcType=BIT}, #{createTime,jdbcType=TIMESTAMP})
     </insert>
-    <insert id="insertSelective" parameterType="com.leone.tx.demo.entity.Account">
+    <insert id="insertSelective" parameterType="com.leone.microservice.transaction.entity.Account">
         insert into t_account
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="accountId != null">
@@ -88,7 +88,7 @@
             </if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.leone.tx.demo.entity.Account">
+    <update id="updateByPrimaryKeySelective" parameterType="com.leone.microservice.transaction.entity.Account">
         update t_account
         <set>
             <if test="account != null">
@@ -115,7 +115,7 @@
         </set>
         where account_id = #{accountId,jdbcType=BIGINT}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.leone.tx.demo.entity.Account">
+    <update id="updateByPrimaryKey" parameterType="com.leone.microservice.transaction.entity.Account">
         update t_account
         set account     = #{account,jdbcType=VARCHAR},
             user_id     = #{userId,jdbcType=BIGINT},
