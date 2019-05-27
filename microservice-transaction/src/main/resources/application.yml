@@ -4,9 +4,9 @@ spring:
 
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://xxx:3306/boot?useUnicode=true&characterEncoding=utf-8&useSSL=false
-    username: xxx
-    password: xxx
+    url: jdbc:mysql://39.108.125.41:3306/boot?useUnicode=true&characterEncoding=utf-8&useSSL=false
+    username: root
+    password: cloud
 
 # redis 配置
   redis:
@@ -67,7 +67,7 @@ mybatis:
 
 
 zk:
-  url: ip:2181
+  url: 39.108.125.41:2181
   lockPath: /zoo-lock
 
 lockName: redis-lock

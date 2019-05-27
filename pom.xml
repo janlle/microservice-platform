@@ -3,26 +3,27 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-    <groupId>com.leone.tx</groupId>
-    <artifactId>microservice-transaction</artifactId>
+    <groupId>com.leone.microservice</groupId>
+    <artifactId>microservice-platform</artifactId>
     <packaging>pom</packaging>
     <version>1.0.0.RELEASE</version>
 
     <modules>
-        <module>tx-demo</module>
+        <module>microservice-transaction</module>
+        <module>microservice-limiting</module>
+        <module>microservice-session</module>
+        <module>microservice-common</module>
+        <module>microservice-timed</module>
     </modules>
 
     <modelVersion>4.0.0</modelVersion>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <java.version>1.8</java.version>
     </properties>
 
     <build>
         <plugins>
-            <!--修改版本插件-->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>versions-maven-plugin</artifactId>
