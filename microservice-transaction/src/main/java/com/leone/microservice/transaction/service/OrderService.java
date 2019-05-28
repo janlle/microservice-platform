@@ -2,6 +2,7 @@ package com.leone.microservice.transaction.service;
 
 import org.springframework.stereotype.Service;
 
+import com.leone.microservice.entity.User;
 /**
  * <p>
  *
