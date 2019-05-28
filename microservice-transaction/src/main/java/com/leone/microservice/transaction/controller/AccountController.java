@@ -32,7 +32,7 @@ public class AccountController {
     }
 
     @GetMapping("{accountId}")
-    public Account transfer(@PathVariable("accountId") Long accountId) {
+    public Account findOne(@PathVariable("accountId") Long accountId) {
         return accountService.findOne(accountId);
     }
 
