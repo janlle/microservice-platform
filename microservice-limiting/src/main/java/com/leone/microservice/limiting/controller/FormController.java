@@ -1,8 +1,8 @@
 package com.leone.microservice.limiting.controller;
 
-import com.leone.boot.limited.anno.CacheLock;
-import com.leone.boot.limited.anno.CacheParam;
-import com.leone.boot.limited.anno.LocalLock;
+import com.leone.microservice.limiting.anno.CacheLock;
+import com.leone.microservice.limiting.anno.CacheParam;
+import com.leone.microservice.limiting.anno.LocalLock;
 import org.springframework.web.bind.annotation.*;
 
 /**

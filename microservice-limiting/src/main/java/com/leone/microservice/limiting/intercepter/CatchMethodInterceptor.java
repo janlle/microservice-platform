@@ -1,8 +1,8 @@
 package com.leone.microservice.limiting.intercepter;
 
-import com.leone.boot.limited.anno.CacheLock;
-import com.leone.boot.limited.config.RedisLockHelper;
-import com.leone.boot.limited.lock.CatchKeyGenerator;
+import com.leone.microservice.limiting.anno.CacheLock;
+import com.leone.microservice.limiting.config.RedisLockHelper;
+import com.leone.microservice.limiting.lock.CatchKeyGenerator;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -30,7 +30,7 @@ public class CatchMethodInterceptor {
     @Autowired
     private RedisLockHelper redisLockHelper;
 
-    @Around("@annotation(com.leone.boot.limited.anno.CacheLock)")
+    @Around("@annotation(com.leone.microservice.limiting.anno.CacheLock)")
     public Object interceptor(ProceedingJoinPoint point) throws Throwable {
         MethodSignature signature = (MethodSignature) point.getSignature();
         Method method = signature.getMethod();

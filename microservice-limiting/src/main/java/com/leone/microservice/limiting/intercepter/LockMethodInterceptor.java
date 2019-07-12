@@ -2,7 +2,7 @@ package com.leone.microservice.limiting.intercepter;
 
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
-import com.leone.boot.limited.lock.LocalKeyGenerator;
+import com.leone.microservice.limiting.lock.LocalKeyGenerator;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;

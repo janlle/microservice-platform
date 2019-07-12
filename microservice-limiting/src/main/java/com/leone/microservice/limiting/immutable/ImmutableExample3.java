@@ -3,7 +3,7 @@ package com.leone.microservice.limiting.immutable;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
-import com.leone.boot.concurrency.annotations.ThreadSafe;
+import com.leone.microservice.limiting.anno.ThreadSafe;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -28,7 +28,6 @@ public class ImmutableExample3 {
 //        set.add(2);
         map2.put(1, 5);
     }
-
 
 
 }

@@ -1,4 +1,4 @@
-package com.leone.microservice.limiting.arithmetic.rollingWindow;
+package com.leone.microservice.limiting.arithmetic.rollingwindow;
 
 import java.util.Random;
 import java.util.concurrent.ExecutorService;
@@ -13,17 +13,13 @@ import java.util.concurrent.atomic.AtomicLong;
  **/
 public class RollingWindowTest {
 
-    /**
-     * 计算器
-     */
+    // 计算器
     private AtomicLong counter = new AtomicLong(0);
-    /**
-     * 初始时间
-     */
+
+    // 初始时间
     private static long timestamp = System.currentTimeMillis();
-    /**
-     * 时间窗口内最大请求个数
-     */
+
+    // 时间窗口内最大请求个数
     private long limit;
 
     public RollingWindowTest(long limit) {
@@ -68,6 +64,4 @@ public class RollingWindowTest {
         }
         executor.shutdown();
     }
-
-
 }

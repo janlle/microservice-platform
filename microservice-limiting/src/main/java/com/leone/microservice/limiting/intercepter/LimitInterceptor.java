@@ -1,8 +1,8 @@
 package com.leone.microservice.limiting.intercepter;
 
 import com.google.common.collect.ImmutableList;
-import com.leone.boot.limited.anno.Limit;
-import com.leone.boot.limited.anno.LimitType;
+import com.leone.microservice.limiting.anno.Limit;
+import com.leone.microservice.limiting.anno.LimitType;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -40,7 +40,7 @@ public class LimitInterceptor {
         this.limitRedisTemplate = limitRedisTemplate;
     }
 
-    @Around("execution(public * *(..)) && @annotation(com.leone.boot.limited.anno.Limit)")
+    @Around("execution(public * *(..)) && @annotation(com.leone.microservice.limiting.anno.Limit)")
     public Object interceptor(ProceedingJoinPoint pjp) {
         MethodSignature signature = (MethodSignature) pjp.getSignature();
         Method method = signature.getMethod();

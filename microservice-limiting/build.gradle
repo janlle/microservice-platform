@@ -9,8 +9,8 @@ apply plugin: 'io.spring.dependency-management'
 
 dependencies {
     compile 'org.springframework.boot:spring-boot-starter-web'
-    compile 'org.projectlombok:lombok:1.18.8'
+    compile 'org.projectlombok:lombok:1.18.2'
     compile 'org.springframework.boot:spring-boot-starter-aop'
-    compile 'org.springframework.boot:spring-boot-starter-redis'
+    compile 'org.springframework.boot:spring-boot-starter-data-redis'
     compile 'com.google.guava:guava:21.0'
 }

@@ -1,6 +1,6 @@
 package com.leone.microservice.limiting.controller;
 
-import com.leone.boot.limited.anno.Limit;
+import com.leone.microservice.limiting.anno.Limit;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

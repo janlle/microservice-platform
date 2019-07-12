@@ -1,6 +1,6 @@
 package com.leone.microservice.limiting.lock;
 
-import com.leone.boot.limited.anno.LocalLock;
+import com.leone.microservice.limiting.anno.LocalLock;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.reflect.MethodSignature;

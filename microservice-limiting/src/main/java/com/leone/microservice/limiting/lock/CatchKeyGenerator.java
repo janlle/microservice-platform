@@ -1,7 +1,7 @@
 package com.leone.microservice.limiting.lock;
 
-import com.leone.boot.limited.anno.CacheLock;
-import com.leone.boot.limited.anno.CacheParam;
+import com.leone.microservice.limiting.anno.CacheLock;
+import com.leone.microservice.limiting.anno.CacheParam;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.reflect.MethodSignature;

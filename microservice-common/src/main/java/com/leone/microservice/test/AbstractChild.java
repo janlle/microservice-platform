@@ -1,4 +1,4 @@
-package com.leone.microservice.Test;
+package com.leone.microservice.test;
 
 /**
  * <p>

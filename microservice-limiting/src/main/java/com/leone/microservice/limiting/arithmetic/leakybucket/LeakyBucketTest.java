@@ -1,4 +1,4 @@
-package com.leone.microservice.limiting.arithmetic.LeakyBucket;
+package com.leone.microservice.limiting.arithmetic.leakybucket;
 
 import com.google.common.util.concurrent.Monitor;
 import com.google.common.util.concurrent.RateLimiter;
@@ -19,20 +19,19 @@ import static java.lang.Thread.currentThread;
  **/
 public class LeakyBucketTest {
 
-    //定义桶的大小
+    // 定义桶的大小
     private final ConcurrentLinkedQueue<Integer> container = new ConcurrentLinkedQueue<>();
 
     private final static int BUCKET_LIMIT = 1000;
 
-    //消费者 不论多少个线程，每秒最大的处理能力是1秒中执行10次
+    // 消费者 不论多少个线程，每秒最大的处理能力是1秒中执行10次
     private final RateLimiter consumerRate = RateLimiter.create(10d);
 
-    //往桶里面放数据时，确认没有超过桶的最大的容量
+    // 往桶里面放数据时，确认没有超过桶的最大的容量
     private Monitor offerMonitor = new Monitor();
 
-    //从桶里消费数据时，桶里必须存在数据
+    // 从桶里消费数据时，桶里必须存在数据
     private Monitor consumerMonitor = new Monitor();
-
 
     /**
      * 往桶里面写数据
@@ -53,7 +52,6 @@ public class LeakyBucketTest {
             throw new IllegalStateException(currentThread().getName() + "The bucket is ful..Pls latter can try...");
         }
     }
-
 
     /**
      * 从桶里面消费数据
