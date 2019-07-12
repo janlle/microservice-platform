@@ -1,4 +1,4 @@
-package com.leone.microservice.limiting.lock;
+package com.leone.microservice.limiting.keygenerator;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 

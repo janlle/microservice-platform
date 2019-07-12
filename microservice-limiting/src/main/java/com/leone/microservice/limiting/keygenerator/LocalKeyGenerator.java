@@ -1,4 +1,4 @@
-package com.leone.microservice.limiting.lock;
+package com.leone.microservice.limiting.keygenerator;
 
 import com.leone.microservice.limiting.anno.LocalLock;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -19,7 +19,7 @@ import java.util.StringJoiner;
 public class LocalKeyGenerator implements LockKeyGenerator {
 
     /**
-     * 生成本地key
+     * 生成本地 key 策略 key-全类名.方法名(参数列表...)
      *
      * @param point
      * @return
@@ -28,18 +28,18 @@ public class LocalKeyGenerator implements LockKeyGenerator {
     public String getLockKey(ProceedingJoinPoint point) {
         Signature signature = point.getSignature();
         if (!(signature instanceof MethodSignature)) {
-            throw new IllegalArgumentException("该注解只能用于方法");
+            throw new IllegalArgumentException();
         }
         MethodSignature methodSignature = (MethodSignature) signature;
         Method method = methodSignature.getMethod();
         LocalLock localLock = method.getAnnotation(LocalLock.class);
-        String key = localLock.key();
+        StringBuffer sb = new StringBuffer(localLock.key());
         StringJoiner joiner = new StringJoiner(", ", "(", ")");
         for (int i = 0; i < point.getArgs().length; i++) {
             joiner.add(point.getArgs()[i].toString());
         }
-        key = key + "-" + point.getTarget().getClass().getName() + "." + method.getName() + joiner.toString();
-        return key;
+        sb.append("-").append(point.getTarget().getClass().getName()).append(".").append(method.getName()).append(joiner.toString());
+        return sb.toString();
     }
 
 }

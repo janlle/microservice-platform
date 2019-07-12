@@ -1,4 +1,4 @@
-package com.leone.microservice.limiting.lock;
+package com.leone.microservice.limiting.keygenerator;
 
 import com.leone.microservice.limiting.anno.CacheLock;
 import com.leone.microservice.limiting.anno.CacheParam;
@@ -27,7 +27,7 @@ public class CatchKeyGenerator implements LockKeyGenerator {
     public String getLockKey(ProceedingJoinPoint point) {
         Signature signature = point.getSignature();
         if (!(signature instanceof MethodSignature)) {
-            throw new IllegalArgumentException("该注解只能用于方法");
+            throw new IllegalArgumentException();
         }
         MethodSignature methodSignature = (MethodSignature) signature;
         Method method = methodSignature.getMethod();

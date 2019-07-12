@@ -2,7 +2,7 @@ package com.leone.microservice.limiting.intercepter;
 
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
-import com.leone.microservice.limiting.lock.LocalKeyGenerator;
+import com.leone.microservice.limiting.keygenerator.LocalKeyGenerator;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -36,7 +36,7 @@ public class LockMethodInterceptor {
             .expireAfterWrite(3, TimeUnit.SECONDS)
             .build();
 
-    @Pointcut("execution(public * *(..)) && @annotation(com.leone.boot.limited.anno.LocalLock)")
+    @Pointcut("execution(public * *(..)) && @annotation(com.leone.microservice.limiting.anno.LocalLock)")
     public void pointCut() {
     }
 
@@ -45,7 +45,7 @@ public class LockMethodInterceptor {
         String key = localKeyGenerator.getLockKey(point);
         if (!StringUtils.isEmpty(key)) {
             if (CACHES.getIfPresent(key) != null) {
-                throw new IllegalArgumentException("请勿重复请求");
+                throw new IllegalArgumentException("repetition commit");
             }
             // 如果是第一次请求,就将 key 当前对象压入缓存中
             CACHES.put(key, key);
@@ -53,7 +53,8 @@ public class LockMethodInterceptor {
         try {
             return point.proceed();
         } catch (Throwable throwable) {
-            throw new IllegalArgumentException("服务器异常");
+            throwable.printStackTrace();
+            return null;
         }
     }
 

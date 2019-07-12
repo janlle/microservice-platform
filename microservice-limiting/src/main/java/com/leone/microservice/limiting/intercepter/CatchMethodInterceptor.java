@@ -2,7 +2,7 @@ package com.leone.microservice.limiting.intercepter;
 
 import com.leone.microservice.limiting.anno.CacheLock;
 import com.leone.microservice.limiting.config.RedisLockHelper;
-import com.leone.microservice.limiting.lock.CatchKeyGenerator;
+import com.leone.microservice.limiting.keygenerator.CatchKeyGenerator;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
