@@ -43,7 +43,7 @@ public class TicketService {
     /**
      * @param requestId 不同服务的标识，规则为[时间戳 - host - port]
      */
-    public void sellRedis(String requestId) {
+    public void sellRedis(String requestId) throws Exception {
 
     }
 
