@@ -32,11 +32,22 @@ public class TicketService {
      * @param requestId 不同服务的标识，规则为[时间戳 - host - port]
      */
     public void zookeeperSell(String requestId) throws Exception {
-        zkLock.lock();
-        RedisAtomicInteger redisAtomicInteger = new RedisAtomicInteger("ticketCount", redisTemplate.getConnectionFactory());
-        int ticketCount = redisAtomicInteger.getAndDecrement();
-        log.info("requestId: " + requestId + " ticketCount: " + ticketCount);
-        zkLock.unlock();
+        new Thread(() -> {
+            try {
+                zkLock.lock();
+                Thread.sleep(1000);
+                RedisAtomicInteger redisAtomicInteger = new RedisAtomicInteger("ticketCount", redisTemplate.getConnectionFactory());
+                int ticketCount = redisAtomicInteger.getAndDecrement();
+                if (ticketCount <= 1) {
+                    return;
+                }
+                // sell...
+                log.info("requestId: " + requestId + " ticketCount: " + ticketCount);
+                zkLock.unlock();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }).start();
     }
 
 

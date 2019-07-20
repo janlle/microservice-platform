@@ -21,7 +21,7 @@ import javax.annotation.PostConstruct;
 @Component
 public class ZkLock implements Lock {
 
-    private static final String CONNECT_ADDR = "ip:2181";
+    private static final String CONNECT_ADDR = "39.108.125.41:2181";
 
     // session超时时间ms
     private static final int SESSION_TIMEOUT = 16000;
