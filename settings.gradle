@@ -11,4 +11,5 @@ include 'microservice-common'
 include 'microservice-timed'
 include 'microservice-cache'
 include 'microservice-lock'
+include 'microservice-search'
 

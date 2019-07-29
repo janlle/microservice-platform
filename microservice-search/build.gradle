@@ -1,0 +1,14 @@
+plugins {
+    id 'org.springframework.boot' version '2.1.5.RELEASE'
+}
+
+apply plugin: 'io.spring.dependency-management'
+
+dependencies {
+    compile 'org.projectlombok:lombok:1.18.2'
+    compile 'org.springframework.boot:spring-boot-starter-web'
+    compile 'org.springframework.boot:spring-boot-starter-data-elasticsearch'
+    compile 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.0.1'
+    compile 'mysql:mysql-connector-java:8.0.15'
+    compile project(':microservice-common') 
+}
