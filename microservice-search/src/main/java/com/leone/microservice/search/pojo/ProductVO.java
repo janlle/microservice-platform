@@ -1,12 +1,14 @@
 package com.leone.microservice.search.pojo;
 
+import java.io.Serializable;
+
 /**
- * <p>
+ * <p> 商品详情vo
  *
  * @author leone
- * @since 2019-07-29
+ * @since 2019-07-30
  **/
-public class ProductVO {
+public class ProductVO implements Serializable {
 
 
 

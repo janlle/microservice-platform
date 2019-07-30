@@ -1,10 +1,10 @@
 package com.leone.microservice.search.service;
 
 
-import com.leone.microservice.search.espo.ProductPO;
 import com.leone.microservice.search.entity.Product;
+import com.leone.microservice.search.espo.ProductPO;
 import com.leone.microservice.search.mapper.ProductMapper;
-import com.leone.microservice.search.repository.ProductRepository;
+import com.leone.microservice.search.repository.ProductEsRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -31,7 +31,7 @@ public class ProductService {
     private ProductMapper productMapper;
 
     @Autowired
-    private ProductRepository productRepository;
+    private ProductEsRepository productEsRepository;
 
     /**
      * 从mysql数据库中加载所有商品数据
@@ -42,26 +42,7 @@ public class ProductService {
         return productMapper.list();
     }
 
-    /**
-     * 从mysql中导入到ES
-     *
-     * @return
-     */
-    public Integer importAll() {
-        // 从数据库查询所有商品
-        List<Product> productList = loadAll();
 
-        List<ProductPO> collect = productList.stream().map(e -> {
-            ProductPO esProduct = new ProductPO();
-            BeanUtils.copyProperties(e, esProduct);
-
-            return esProduct;
-        }).collect(Collectors.toList());
-
-        Iterable<ProductPO> products = productRepository.saveAll(collect);
-
-        return productList.size();
-    }
 
 
     /**
@@ -72,7 +53,7 @@ public class ProductService {
      */
     public Long deleteFromEs(Long productId) {
         try {
-            productRepository.deleteById(productId);
+            productEsRepository.deleteById(productId);
         } catch (Exception e) {
             e.printStackTrace();
             return 0L;
@@ -89,8 +70,8 @@ public class ProductService {
     public Integer deleteBatchFromEs(Set<Long> productIds) {
         if (!CollectionUtils.isEmpty(productIds)) {
             Set<ProductPO> productSet = new HashSet<>();
-            productIds.forEach(e -> productSet.add(new ProductPO(e)));
-            productRepository.deleteAll(productSet);
+            productIds.forEach(e -> productSet.add(new ProductPO()));
+            productEsRepository.deleteAll(productSet);
             return productSet.size();
         }
         return 0;
@@ -104,7 +85,7 @@ public class ProductService {
      * @return
      */
     public Page<ProductPO> search(String keyword, Pageable pageable) {
-        return productRepository.findByProductNameAndProductTitleAndKeywords(keyword, keyword, keyword, pageable);
+        return productEsRepository.findByProductNameAndProductTitleAndKeywords(keyword, keyword, keyword, pageable);
     }
 
 
@@ -119,7 +100,7 @@ public class ProductService {
         if (ObjectUtils.isEmpty(product)) {
             ProductPO esProduct = new ProductPO();
             BeanUtils.copyProperties(product, esProduct);
-            return productRepository.save(esProduct);
+            return productEsRepository.save(esProduct);
         }
         return null;
     }

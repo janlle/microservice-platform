@@ -1,5 +1,6 @@
 plugins {
     id 'org.springframework.boot' version '2.1.5.RELEASE'
+    id 'com.arenagod.gradle.MybatisGenerator' version '1.4'
 }
 
 apply plugin: 'io.spring.dependency-management'
@@ -11,4 +12,14 @@ dependencies {
     compile 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.0.1'
     compile 'mysql:mysql-connector-java:8.0.15'
     compile project(':microservice-common') 
+}
+
+
+configurations {
+    mybatisGenerator
+}
+
+mybatisGenerator {
+    verbose = true
+    configFile = 'src/main/resources/generatorConfig.xml'
 }

@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
  * @since 2019-06-27
  **/
 @Repository
-public interface ProductRepository extends ElasticsearchRepository<ProductPO, Long> {
+public interface ProductEsRepository extends ElasticsearchRepository<ProductPO, Long> {
 
     /**
      * 搜索查询

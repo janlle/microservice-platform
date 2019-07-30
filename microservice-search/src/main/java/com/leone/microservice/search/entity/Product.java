@@ -35,6 +35,8 @@ public class Product implements Serializable {
 
     private Integer status;
 
+    private String location;
+
     private Date createTime;
 
     private Date updateTime;
@@ -159,5 +161,13 @@ public class Product implements Serializable {
 
     public void setDelete(Boolean delete) {
         this.delete = delete;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 }

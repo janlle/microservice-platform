@@ -1,9 +1,11 @@
 package com.leone.microservice.search.espo;
 
+import com.leone.microservice.search.entity.Attribute;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * <p>
@@ -13,28 +15,25 @@ import java.io.Serializable;
  **/
 @Document(indexName = "store", type = "product", shards = 1, replicas = 0)
 public class ProductPO implements Serializable {
+
     private static final long serialVersionUID = -1L;
 
     @Id
     private Long productId;
 
-    // 商品分类id
-    private Integer categoryId;
-
     // 商品分类名称
-    //@Field(type = FieldType.Keyword)
-    private String categoryName;
+    private String categoryId;
 
     // 商品标题
     //@Field(analyzer = "ik_max_word", type = FieldType.Text)
-    private String productTitle;
+    private String title;
 
     // 商品名称
     //@Field(analyzer = "ik_max_word", type = FieldType.Text)
-    private String productName;
+    private String name;
 
     // 商品价格
-    private Long productPrice;
+    private Long price;
 
     // 搜索关键字
     //@Field(analyzer = "ik_max_word", type = FieldType.Text)
@@ -49,19 +48,13 @@ public class ProductPO implements Serializable {
     private String brandName;
 
     // 商品销量
-    private Integer productSale;
+    private Integer stale;
 
     // 商品库存
     private Integer stock;
 
-    private String description;
-
-    public ProductPO(Long productId) {
-        this.productId = productId;
-    }
-
-    public ProductPO() {
-    }
+    // 属性列表
+    private List<Attribute> attributeList;
 
     public Long getProductId() {
         return productId;
@@ -71,44 +64,36 @@ public class ProductPO implements Serializable {
         this.productId = productId;
     }
 
-    public Integer getCategoryId() {
+    public String getCategoryId() {
         return categoryId;
     }
 
-    public void setCategoryId(Integer categoryId) {
+    public void setCategoryId(String categoryId) {
         this.categoryId = categoryId;
     }
 
-    public String getCategoryName() {
-        return categoryName;
+    public String getTitle() {
+        return title;
     }
 
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getProductTitle() {
-        return productTitle;
+    public String getName() {
+        return name;
     }
 
-    public void setProductTitle(String productTitle) {
-        this.productTitle = productTitle;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getProductName() {
-        return productName;
+    public Long getPrice() {
+        return price;
     }
 
-    public void setProductName(String productName) {
-        this.productName = productName;
-    }
-
-    public Long getProductPrice() {
-        return productPrice;
-    }
-
-    public void setProductPrice(Long productPrice) {
-        this.productPrice = productPrice;
+    public void setPrice(Long price) {
+        this.price = price;
     }
 
     public String getKeywords() {
@@ -135,12 +120,12 @@ public class ProductPO implements Serializable {
         this.brandName = brandName;
     }
 
-    public Integer getProductSale() {
-        return productSale;
+    public Integer getStale() {
+        return stale;
     }
 
-    public void setProductSale(Integer productSale) {
-        this.productSale = productSale;
+    public void setStale(Integer stale) {
+        this.stale = stale;
     }
 
     public Integer getStock() {
@@ -151,12 +136,11 @@ public class ProductPO implements Serializable {
         this.stock = stock;
     }
 
-    public String getDescription() {
-        return description;
+    public List<Attribute> getAttributeList() {
+        return attributeList;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setAttributeList(List<Attribute> attributeList) {
+        this.attributeList = attributeList;
     }
-
 }
